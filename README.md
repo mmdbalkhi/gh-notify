@@ -18,4 +18,4 @@ cargo install --path .
 
 ## License
 
-* [APACHE-2](./LICENSE)
+* [APACHE-2](./LICENSE-apache) & [MIT](./LICENSE-mit)
