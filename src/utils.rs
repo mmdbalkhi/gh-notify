@@ -1,4 +1,7 @@
-use std::{fs, io};
+use std::{
+    fs,
+    io::{self, Write},
+};
 
 // use dirs::home_dir;
 use notify_rust::Notification;
@@ -26,7 +29,7 @@ pub fn notify(summary: &str, msg: &str) -> Result<(), Box<dyn std::error::Error>
         .body(msg)
         .icon("github")
         .appname("gh-notify")
-        .show()?; // TODO: open github-notif on webbrowser when clicked
+        .show()?; // TODO: open github-notify on webbrowser when clicked
     Ok(())
 }
 
@@ -38,11 +41,12 @@ pub fn write_api() -> Result<(), Box<dyn std::error::Error>> {
     //! - filepath: `$HOME/.ghnotifyrc
     //!
 
-    println!("api-key not found. Enter your api-key(with *notification* permission)"); // FIX: use pretty stdin
+    print!("api-key not found. Enter your api-key(with *notification* permission): ");
+    io::stdout().flush().unwrap();
     let mut api_key = String::new();
     io::stdin()
         .read_line(&mut api_key)
-        .expect("Faild to read input");
+        .expect("Failed to read input.");
 
     if !api_key.starts_with("ghp_") {
         panic!("api-key might be incorrect.");
@@ -51,7 +55,7 @@ pub fn write_api() -> Result<(), Box<dyn std::error::Error>> {
     let body = Config { apikey: api_key };
     let config = toml::to_string(&body).unwrap();
 
-    fs::write(PATH, config).expect("Faild to write file");
+    fs::write(PATH, config).expect("Failed to write file");
     Ok(())
 }
 
