@@ -13,7 +13,7 @@ version = "0.2.0"
 
 [dependencies]
 chrono = "0.4.22"
-dirs = "4.0.0"
+dirs = "5.0.0"
 notify-rust = "4.5.8"
 reqwest = {version = "0.11.11", features = ["json"]}
 serde = "1.0.144"
